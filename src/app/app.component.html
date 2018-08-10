@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+ <html>
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+    </head>            
+ <body>
+<div class="container-fluid">
+ <header>
+      <nav class="navbar">
+          <a class="navbar-brand" href="coin.mydreamworld.xyz"  title="{{title}}">
+            <img src="../assets/c.png" width="30" height="30" class="d-inline-block align-top" alt="">
+           {{title}}
+          </a>
+          <a class="navbar-brand"  href="https://coinmarketcap.com/" title="Official Site">
+              <img  src="../assets/download.jpg" width="30" height="30" class="d-inline-block align-top" alt="">
+            </a>
+          <div class="navbar-collapse" id="navbarNav">
+              <ul class="navbar-nav">
+                <li class="nav-item">
+                  <a class="nav-link" routerLink="listview">Crypto-Currency List View </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" routerLink="comparison">Comparison View </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" routerLink="pricechart">Price Chart View </a>
+                </li>
+              </ul>
+          </div>
+        </nav>
+  </header>
+  <p class="font-weight-light">CryptoCurrencies : {{garr.active_cryptocurrencies}}
+      &nbsp;&nbsp; Markets : {{garr.active_markets}} &nbsp;&nbsp; 
+       &nbsp;&nbsp; BTC Dominance : {{garr.bitcoin_percentage_of_market_cap}}%
+  </p>
+
+  <div class="container">
+      <router-outlet></router-outlet> 
+  </div>
+
+
+  <footer>
+    <nav class="navbar foo">
+        <a href="https://www.facebook.com/CoinMarketCap"  title="facebook" class="i fa fa-facebook"></a>
+        <a href="https://twitter.com/CoinMarketCap" title="twitter" class="i fa fa-twitter"></a>
+        <a href="https://appstore.com/coinmarketcapcom/" title="AppStore" class="i glyphicon glyphicon-apple">Store</a>
+        <br/><br/>
+          © 2018 Crypto Currency
+    </nav>
+  </footer>
+</div>
+</body>
+</html>

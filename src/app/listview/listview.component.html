@@ -1,0 +1,78 @@
+<head>
+        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+        
+</head>
+
+<div class="container-fluid">
+        <mat-slide-toggle class="slidetoggler" [color]="color"  (change)="displaysorting()"><p>Sort <span class="glyphicon glyphicon-sort"></span></p></mat-slide-toggle>
+    <div class="sorting" *ngIf="sortvar">
+        <p class="slidebox">Market Cap : {{marketcapvalue.value}}
+            <mat-slider  class="slider" #marketcapvalue [value]=1000000000 (change)="sortmarketcap(marketcapvalue.value)"  [max]=1000000000 [min]=0  [step]=100000 [thumbLabel]=true [tickInterval]="tickInterval"  ></mat-slider>
+        </p>
+        
+        <p class="slidebox">Price : {{pricevalue.value}}
+            <mat-slider  class="slider" #pricevalue [value]=10000 (change)="sortprice(pricevalue.value)" [max]=10000 [min]=0.0001 [step]=1 [thumbLabel]=true [tickInterval]="tickInterval"  ></mat-slider>
+        </p>
+    </div>
+<br/><br/> 
+
+    <div class="card text-center">
+            <div class="card-header">
+              <ul class="nav nav-tabs card-header-tabs">
+                <li class="nav-item">
+                  <a class="nav-link active" (click)="activelink()">All</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" (click)="gofavlist()">Favorites</a>
+                </li>
+              </ul>
+            </div>
+            
+            <a (click)="gocomparelist()" class="comparison" ><i class="material-icons comparison" *ngIf="count==2">compare</i></a>
+
+    <table class="table table-striped"  (pageChange)="p = $event">
+            <thead>
+            <tr class="tabletitle">
+                <th style="width: 3%"  title="ID">ID</th>
+                <th style="width: 30%" title="Name" >Name</th>
+                <th style="width: 13%" title="symbol">Symbol</th>
+                <th style="width: 20%" title="Market cap">Market Cap</th>
+                <th style="width: 20%" title="Price">Price</th>
+                <th style="width: 14%" title="Favorite">Add</th>
+              
+            </tr>
+            </thead>
+            <tbody>
+          
+            <tr (press)="checkboxdisplay()" *ngFor="let k of datarray | paginate: { itemsPerPage: 10, currentPage: p };let i=index" >
+                <th>{{k.id}}
+                    <mat-checkbox  (change)="check($event,val=k.id)"
+                        *ngIf="displaycheckbox" class="example-margin"></mat-checkbox>
+                </th>
+                <th><a class="namesall"><img src="https://raw.githubusercontent.com/dziungles/cryptocurrency-logos/master/coins/16x16/{{k.website_slug}}.png"  width="15" height="15" class="d-inline-block" alt="">{{k.name}}</a></th>
+                <th>{{k.symbol}}</th>
+                <th >{{k.quotes.USD.market_cap}}</th>
+                <th>{{k.quotes.USD.price}}</th>
+                <th>
+                    <a id="{{k.id}}" (click)="addfavorite(arg=k.id)">
+                        <i  class="material-icons">favorite</i></a>&nbsp;
+                    <a id="{{k.id}}" (click)="remfavorite(re=k.id)">
+                        <i class="material-icons">delete</i></a>
+                <a (click)="gopricechart(v=k.id)" class="gochart">PriceChart</a></th>
+            </tr>
+            </tbody>
+            
+          
+            <tfoot>
+            <tr>
+              <pagination-controls class="my-pagination" (pageChange)="p = $event" previousLabel="Previous" nextLabel="Next" maxSize="0"></pagination-controls>
+            </tr>
+            </tfoot>
+          </table>  
+          </div>
+
+
+</div>
+
